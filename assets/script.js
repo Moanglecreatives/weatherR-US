@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
  //========================= get weather ==============================//
  function getWeather() {
-    const apiKey = '5a876642351109dd856659747d6bd117';
+    const apiKey = 'YOUR_API_KEY';
     const city = document.getElementById('city').value;
 
     if (!city) {
