@@ -35,9 +35,6 @@ The dashboard will display the current weather based on the entered city.
 
 Click Logout to return to the login page.
 
-**Minified Files**
-
-Minified CSS and JavaScript files are located in the /minified folder for better performance.
 
 
 
