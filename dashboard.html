@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wather R'Us Dashboard</title>
+    <script src="assets/script.js"></script>
+    <link rel="stylesheet" href="assets/styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <!-- Dashboard-->
+    <header>
+        <h2>Weather R'US</h2>
+        <button class="logout-btn" id="logoutBtn">
+            <i class='bx bx-log-out'></i>
+            <span class="tooltiptext">Log out</span>
+        </button>
+    </header>
+    <div id="dashboard-container" class="form-container">
+        <div class="search">
+            <div class="input-group">
+                <input type="text" id="city" placeholder="Enter city">
+            </div>
+            <button onclick="getWeather()" class="btn" id="logout"><i class='bx bx-search-alt-2'></i></button>
+        </div>
+
+        <img id="weather-icon" alt="Weather Icon">
+
+        <div id="temp-div"></div>
+
+        <div id="weather-info"></div>
+
+        <div id="hourly-forecast"></div>
+    </div>
+
+</body>
+
+</html>
