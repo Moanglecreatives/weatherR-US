@@ -10,11 +10,11 @@ body {
     justify-content: center;
     min-height: 100vh;
     align-items: center;
-    background: url(./images/bg.webp) no-repeat;
+    background: url(./images/bg2.jpg) no-repeat;
     background-size: cover;
     background-position: center;
     overflow: hidden;
-    padding: 32px;
+    padding: 16px;
 }
 
 h2,
@@ -23,15 +23,17 @@ p {
     color: #fff;
     margin: 8px 0;
 }
-h3{
-    font-weight: 100;;
+
+h3 {
+    font-weight: 100;
+    font-size:24px !important;
 }
 
 .form-container {
-    min-width: 350px;
+    min-width: 360px;
     background: transparent;
     color: #fff;
-    padding: 32px;
+    padding: 10px;
     border-radius: 16px;
     border: 2px solid rgba(225, 225, 225, .2);
     backdrop-filter: blur(20px);
@@ -71,19 +73,26 @@ h3{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .search .input-group {
     width: 90%;
-    margin:10px;
+    margin: 0 auto;
 }
 
-.search .btn {
-    width: 100px !important;
+.search .btn{
+    position: absolute;
+    right: 8px;
+    top: 10%;
+    height: 40px !important;
+    background: #de08d1;
+    width: 52px !important;    
 }
 
 .input-group input::placeholder {
     color: #fff;
+    opacity:0.5;
 }
 
 .input-group i {
@@ -94,8 +103,7 @@ h3{
     font-size: 16px;
 }
 
-.form-container .btn,
-.search .btn {
+.form-container .btn {
     background: #de08d1;
     width: 100%;
     border-radius: 40px;
@@ -107,6 +115,7 @@ h3{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
+
 
 .form-container .btn:hover {
     opacity: 0.5;
@@ -131,12 +140,8 @@ h3{
     text-align: center;
 }
 
-header {
-    position: fixed;
-    padding: 32px;
-    z-index:1;
-    top: 0;
-    left: 0;
+.header {
+    padding: 16px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -184,10 +189,40 @@ header {
     visibility: visible;
 }
 
-#temp-div p {
-    font-size: 60px;
-    margin-top: -30px;
+.weather-results {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 30px;
+    margin: 16px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-bottom: 100px;
+}
+#results{
+    display: none; 
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    border-bottom: 1px solid rgba(225, 225, 225, 0.2);
+    
+    padding: 16px;
+}
 
+#temp-div h2 {
+    font-size: 3rem;
+    font-weight: 100;
+    color: #de08d1;
+    
+}
+
+#temp-div p {
+    font-size: 12px;
+    margin-top: -30px;
 }
 
 #weather-info {
@@ -195,18 +230,20 @@ header {
 }
 
 #weather-icon {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 10px;
+    width: 70px;
+    height: 70px;
     margin-bottom: 0;
     display: none;
 }
 
-#hourly-forecast {
+.hourly-container {
+    overflow: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    width: 300px;
     margin-top: 50px;
     overflow-x: auto;
     white-space: nowrap;
-    display: flex;
     justify-content: space-between;
 }
 
@@ -226,7 +263,14 @@ header {
     margin-bottom: 5px;
 }
 
-#hourly-heading {
+#hourly-heading,
+#weather-anomalies {
     color: #fff;
     margin-top: 10px;
+}
+
+#weather-anomalies h3,#hourly-forecast h3 {
+    color: #fff;
+    font-size: 2rem;
+    text-align: center;
 }
