@@ -25,8 +25,6 @@ This project uses the OpenWeatherMap API to fetch live weather data. To set it u
 
 Get your API key from OpenWeatherMap.
 
-Replace YOUR_API_KEY in script.js with your actual API key.
-
 **Usage**
 
 Open index.html and log in.
