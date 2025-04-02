@@ -77,11 +77,13 @@ function displayWeather(data) {
     const weatherInfoDiv = document.getElementById('weather-info');
     const weatherIcon = document.getElementById('weather-icon');
     const hourlyForecastDiv = document.getElementById('hourly-forecast');
+    const cordinatesDiv = document.getElementById('cordinates');
 
     // Clear previous content
     weatherInfoDiv.innerHTML = '';
     hourlyForecastDiv.innerHTML = '';
     tempDivInfo.innerHTML = '';
+    cordinatesDiv.innerHTML = '';
 
     if (data.cod === '404') {
         weatherInfoDiv.innerHTML = `<p>${data.message}</p>`;
@@ -90,13 +92,18 @@ function displayWeather(data) {
         const temperature = Math.round(data.main.temp); // Already in Celsius
         const description = data.weather[0].description;
         const iconCode = data.weather[0].icon;
+        const longitude = Math.round(data.coord.lon);
+        const latitude = Math.round(data.coord.lat);
+
         const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
 
         tempDivInfo.innerHTML = `<h2>${temperature}°C</h2>`;
         weatherInfoDiv.innerHTML = `
             <h3>${cityName}</h3>
             <p>${description.charAt(0).toUpperCase() + description.slice(1)}</p>
+           
         `;
+        cordinatesDiv.innerHTML = `<p> H ${latitude} °C, L ${longitude} °C</p>`;
         weatherIcon.src = iconUrl;
         weatherIcon.alt = description;
         showImage();
@@ -109,7 +116,7 @@ function displayHourlyForecast(hourlyData) {
 
     // Create and append the title separately
     const title = document.createElement('h3');
-    title.textContent = 'Hourly Forecast';
+    title.textContent = 'Forecast';
     title.classList.add('hourly-title'); // Add a class for styling
     hourlyForecastDiv.appendChild(title);
 
@@ -123,6 +130,7 @@ function displayHourlyForecast(hourlyData) {
         const dateTime = new Date(item.dt * 1000); // Convert timestamp to milliseconds
         const hour = dateTime.getHours();
         const temperature = Math.round(item.main.temp);
+        
         const iconCode = item.weather[0].icon;
         const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
 
@@ -131,6 +139,7 @@ function displayHourlyForecast(hourlyData) {
                 <span>${hour}:00</span>
                 <img src="${iconUrl}" alt="Hourly Weather Icon">
                 <span>${temperature}°C</span>
+            
             </div>
         `;
 
@@ -144,23 +153,30 @@ function displayHourlyForecast(hourlyData) {
 function checkForAnomalies(data) {
     let anomalies = [];
 
-    if (data.main.temp > 40) anomalies.push("🔥 Extreme Heat Alert!");
-    if (data.main.temp < -5) anomalies.push("❄️ Extreme Cold Alert!");
-    if (data.wind.speed > 20) anomalies.push("💨 Strong Wind Warning!");
-    if (data.weather[0].main === "Thunderstorm") anomalies.push("⛈️ Thunderstorm Alert!");
-    if (data.weather[0].main === "Tornado") anomalies.push("🌪️ Tornado Warning!");
-    if (data.rain && data.rain["1h"] > 10) anomalies.push("☔ Heavy Rain Warning!");
+    console.log("Checking for anomalies in data:", data); // Debugging log
 
+    const temp = data.main.temp;
+    const feelsLike = data.main.feels_like;
+
+    // Feels Like anomaly
+    if (temp !== feelsLike) {
+        anomalies.push(`Feels Like: ${feelsLike}°C `);
+
+        // Can add this to show difference (differs by ${Math.abs(Math.round(temp - feelsLike))}°C)
+    }
+
+    
     const anomalyDiv = document.getElementById("weather-anomalies");
-    anomalyDiv.innerHTML = "<h3>Weather Anomalies</h3>";
 
     if (anomalies.length > 0) {
-        anomalyDiv.innerHTML += `<div class='myList'><ul class='anomaly-list'>` + anomalies.map(a => `<li>${a}</li>`).join("") + "</ul></div>";
-        anomalyDiv.style.color = "red";
+        anomalyDiv.innerHTML = `<div class='myList'><ul class='anomaly-list'>` + anomalies.map(a => `<li>${a}</li>`).join("") + "</ul></div>";
     } else {
-        anomalyDiv.innerHTML += "<p>No weather anomalies detected.</p>";
+        anomalyDiv.innerHTML += "<p>No anomalies detected.</p>";
     }
+
 }
+
+
 
 
 function showImage() {
