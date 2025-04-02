@@ -165,7 +165,6 @@ function checkForAnomalies(data) {
         // Can add this to show difference (differs by ${Math.abs(Math.round(temp - feelsLike))}°C)
     }
 
-    
     const anomalyDiv = document.getElementById("weather-anomalies");
 
     if (anomalies.length > 0) {
@@ -175,9 +174,6 @@ function checkForAnomalies(data) {
     }
 
 }
-
-
-
 
 function showImage() {
     const weatherIcon = document.getElementById('weather-icon');
